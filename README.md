@@ -18,3 +18,11 @@ sample data
 	"url" : "hoe.com",
 	"domain": "ss.cpm"
 }
+
+mysql database setup
+--------------------------------
+set the following as per your system in 
+file path: src\main\resources\application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/{youy dbname}?autoReconnect=true
+spring.datasource.username={username}
+spring.datasource.password={password}
