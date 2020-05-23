@@ -26,11 +26,14 @@ public class UrlServiceImpl implements UrlService{
 		String tinyUrl = urlEncoder.encode(count);
 		tinyUrl = model.getDomain() + "/" + tinyUrl;
 		
-		Url url = new Url();
-		url.setTinyUrl(tinyUrl);
-		url.setUrl(model.getUrl());
-		url.setCreatedAt(new Date());
-		urlRepository.save(url);
+		Url url = urlRepository.getFromUrl(model.getUrl(), model.getDomain());
+		if(url == null || !url.getTinyUrl().contains(model.getDomain())) {
+			url = new Url();
+			url.setTinyUrl(tinyUrl);
+			url.setUrl(model.getUrl());
+			url.setCreatedAt(new Date());
+			urlRepository.save(url);
+		}
 		return url.getTinyUrl();
 	}
 
